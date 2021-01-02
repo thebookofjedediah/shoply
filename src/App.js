@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import Product from './Product'
 import Cart from './Cart'
-import { ADD_TO_CART } from './actionTypes';
+import { ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
 
 import './App.css';
 
@@ -10,6 +10,9 @@ function App() {
 
   const addProduct = (id) => {
     dispatch({type: ADD_TO_CART, payload: { productId: id, quantity: 1 } })
+  }
+  const removeItem = (id) => {
+    dispatch({type: REMOVE_FROM_CART, payload: id })
   }
 
   const dispatch = useDispatch();
@@ -25,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <Cart/>
+      <Cart removeItem={removeItem}/>
       <h1>Shoply</h1>
       <hr />
       {products}

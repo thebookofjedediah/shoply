@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 
-function Cart() {
+function Cart({ removeItem }) {
 
     const cart = useSelector(state => state.cart)
     const inventory = useSelector(state => state.inventory);
-    const cartItems = cart.map((item) => ( {...inventory[item.productId], quantity: item.quantity} ))
+    const cartItems = cart.map((item) => ( {...inventory[item.productId], id: item.productId, quantity: item.quantity} ))
     const cartTotal = cartItems.reduce((acc, item) => {
       return acc += item.price * item.quantity;
     }, 0)
@@ -14,6 +14,7 @@ function Cart() {
           <p><b>{item.name}</b></p>    
           <p>${item.price}</p>    
           <p>Quantity: {item.quantity}</p>
+          <button onClick={() => {removeItem(item.id)}}>Remove</button>
         </div>
       ))
   

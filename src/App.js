@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import Product from './Product'
 import Cart from './Cart'
-import { ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
+import { ADD_TO_CART, REMOVE_FROM_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY } from './actionTypes';
 
 import './App.css';
 
@@ -13,6 +13,13 @@ function App() {
   }
   const removeItem = (id) => {
     dispatch({type: REMOVE_FROM_CART, payload: id })
+  }
+  const incrementQuantity = (id) => {
+    dispatch({type: INCREMENT_QUANTITY, payload: id})
+  }
+
+  const decrementQuantity = (id) => {
+    dispatch({type: DECREMENT_QUANTITY, payload: id})
   }
 
   const dispatch = useDispatch();
@@ -28,7 +35,11 @@ function App() {
 
   return (
     <div className="App">
-      <Cart removeItem={removeItem}/>
+      <Cart 
+        removeItem={removeItem}
+        incrementQuantity={incrementQuantity}
+        decrementQuantity={decrementQuantity}
+      />
       <h1>Shoply</h1>
       <hr />
       {products}

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-function Cart({ removeItem }) {
+function Cart({ removeItem, incrementQuantity, decrementQuantity }) {
 
     const cart = useSelector(state => state.cart)
     const inventory = useSelector(state => state.inventory);
@@ -13,7 +13,10 @@ function Cart({ removeItem }) {
         <div key={item.id}>
           <p><b>{item.name}</b></p>    
           <p>${item.price}</p>    
-          <p>Quantity: {item.quantity}</p>
+          <p>Quantity: {item.quantity} 
+            <span><button onClick={() => {incrementQuantity(item.id)}}>+</button></span>
+            <span><button onClick={() => {decrementQuantity(item.id)}}>-</button></span>
+          </p>
           <button onClick={() => {removeItem(item.id)}}>Remove</button>
         </div>
       ))

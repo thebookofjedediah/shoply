@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import Product from './Product'
+import Cart from './Cart'
 import { ADD_TO_CART } from './actionTypes';
 
 import './App.css';
@@ -21,13 +22,10 @@ function App() {
     return <Product key={prodId} id={prodId} product={prod} addProduct={addProduct} />
   });
 
-  const cart = useSelector(state => state.cart)
-  const cartItems = cart.map((item) => ( <div>{inventory[item.productId].name}</div> ))
-
 
   return (
     <div className="App">
-      <div><b>Cart:</b> {cartItems}</div>
+      <Cart/>
       <h1>Shoply</h1>
       <hr />
       {products}
